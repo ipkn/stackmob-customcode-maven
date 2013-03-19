@@ -25,7 +25,7 @@ import scala.collection.JavaConverters._
 
 class HelloWorld extends CustomCodeMethod {
 
-  override def getMethodName: String = "hello/world"
+  override def getMethodName: String = "hello3world"
 
   override def getParams: JList[String] = List[String]().asJava
 
