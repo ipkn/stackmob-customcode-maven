@@ -10,18 +10,20 @@ import scala.collection.JavaConverters._
 
 class CustomCodeGame extends CustomCodeMethod {
 
-  override def getMethodName: String = "cc_game"
+	override def getMethodName: String = "cc_game"
 
-  override def getParams: JList[String] = List[String]("game_id", "reset_begin", "reset_interval", "password").asJava
+		override def getParams: JList[String] = List[String]("game_id", "reset_begin", "reset_interval", "password").asJava
 
-  override def execute(request: ProcessedAPIRequest, serviceProvider: SDKServiceProvider): ResponseToProcess = {
-	  val verb = request.getVerb 
-	  verb match {
-		  case MethodVerb.GET =>
-			  new ResponseToProcess(HttpURLConnection.HTTP_OK, Map("msg" -> "Hello, world! GET").asJava)
-		  case _ =>
-				  new ResponseToProcess(HttpURLConnection.HTTP_OK, Map("msg" -> "Hello, world! DEFAULT").asJava)
-	  }
-  }
+		override def execute(request: ProcessedAPIRequest, serviceProvider: SDKServiceProvider): ResponseToProcess = {
+			val verb = request.getVerb 
+			verb match {
+				case MethodVerb.GET =>
+					new ResponseToProcess(HttpURLConnection.HTTP_OK, Map("msg" -> "Hello, world! GET", "url" -> request.getUrl()).asJava)
+				case MethodVerb.PUT =>
+					new ResponseToProcess(HttpURLConnection.HTTP_OK, Map().asJava)
+				case _ =>
+					new ResponseToProcess(HttpURLConnection.HTTP_BAD_METHOD, Map("error" -> "Not supported method.").asJava)
+			}
+		}
 
 }
